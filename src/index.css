@@ -68,7 +68,7 @@ code {
 
 /* Modern background pattern */
 .modern-bg {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #899cf3 0%, #8868a8 100%);
   position: relative;
   overflow: hidden;
 }
@@ -102,32 +102,3 @@ code {
   pointer-events: none;
 }
 
-
-/* Популярные фоновые эффекты */
-
-/* Градиентная сетка */
-.mesh-background {
-  background: 
-    radial-gradient(at 40% 20%, hsla(228,100%,74%,1) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, hsla(189,100%,56%,1) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, hsla(355,100%,93%,1) 0px, transparent 50%);
-}
-
-/* Анимированные волны */
-.wave-background {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-}
-
-@keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Точечный паттерн */
-.dots-background {
-  background-image: radial-gradient(circle, #ffffff08 1px, transparent 1px);
-  background-size: 20px 20px;
-}
