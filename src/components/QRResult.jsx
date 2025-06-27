@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export default function QRResult({ path, params }) {
 
   const fileName = path.split("\\").pop().split("/").pop();
-  const baseName = fileName.replace(/\.[^/.]+$/, ""); 
+  const baseName = fileName.replace(/\.[^/.]+$/, "");
   const previewUrl = baseName
     ? `http://localhost:8080/qrcodes/download?fileName=${encodeURIComponent(baseName)}.png`
     : "/example-qr.png";
@@ -35,7 +35,7 @@ export default function QRResult({ path, params }) {
             throw new Error(errMsg);
           });
         }
-        return res.text(); 
+        return res.text();
       })
       .then((generatedFileName) => {
         const downloadUrl = `http://localhost:8080/qrcodes/download?fileName=${encodeURIComponent(generatedFileName)}`;
@@ -119,11 +119,10 @@ export default function QRResult({ path, params }) {
         <button
           onClick={handleDownload}
           disabled={!path}
-          className={`w-full h-10 text-base font-semibold rounded-lg shadow-lg transition-all duration-200 flex items-center justify-center gap-2 ${
-            path
+          className={`w-full h-10 text-base font-semibold rounded-lg shadow-lg transition-all duration-200 flex items-center justify-center gap-2 ${path
               ? "bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white hover:shadow-xl"
               : "bg-gray-400 text-gray-600 cursor-not-allowed"
-          }`}
+            }`}
         >
           <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path

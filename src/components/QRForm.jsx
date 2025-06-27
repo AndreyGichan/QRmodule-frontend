@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 export default function QRForm({ onGenerate, setParams }) {
     const [content, setContent] = useState("");
@@ -6,6 +6,7 @@ export default function QRForm({ onGenerate, setParams }) {
     const [foregroundColor, setForegroundColor] = useState("#000000");
     const [backgroundColor, setBackgroundColor] = useState("#ffffff");
     const [logoFile, setLogoFile] = useState(null);
+    const fileInputRef = useRef(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -170,6 +171,7 @@ export default function QRForm({ onGenerate, setParams }) {
                         </label>
                         <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-blue-400 transition-colors">
                             <input
+                                ref={fileInputRef}
                                 type="file"
                                 accept="image/*"
                                 onChange={(e) => setLogoFile(e.target.files[0])}
@@ -177,15 +179,32 @@ export default function QRForm({ onGenerate, setParams }) {
                             />
                             {logoFile && (
                                 <div className="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
-                                    <p className="text-sm text-green-700 font-medium flex items-center gap-2">
-                                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                        </svg>
-                                        Файл загружен: {logoFile.name}
-                                    </p>
-                                    <p className="text-xs text-green-600 mt-1">Размер: {(logoFile.size / 1024).toFixed(1)} KB</p>
+                                    <div className="flex justify-between items-center">
+                                        <div>
+                                            <p className="text-sm text-green-700 font-medium flex items-center gap-2">
+                                                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                </svg>
+                                                Файл загружен: {logoFile.name}
+                                            </p>
+                                            <p className="text-xs text-green-600 mt-1">Размер: {(logoFile.size / 1024).toFixed(1)} KB</p>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                setLogoFile(null);
+                                                if (fileInputRef.current) {
+                                                    fileInputRef.current.value = null; // Сброс значения input type="file"
+                                                }
+                                            }}
+                                            className="ml-4 text-red-600 text-sm font-medium hover:underline"
+                                        >
+                                            Удалить
+                                        </button>
+                                    </div>
                                 </div>
                             )}
+
                         </div>
                         <div className="text-xs text-gray-500">Рекомендуемый размер: 200x200px, форматы: PNG, JPG, SVG</div>
                     </div>
